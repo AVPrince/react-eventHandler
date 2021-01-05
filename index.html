@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Event Handler</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        button {
+            margin: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <!--React-->
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js" ></script>
+<!--React Dom-->
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" ></script>
+<!--Babel-->
+<script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<script type="text/babel">
+    class Counter extends React.Component {
+        constructor(props){
+            super(props);
+            this.state = {
+                count: 0,
+            };
+
+            // this.handleIncrement = this.handleIncrement.bind(this);
+        }
+        
+        handleIncrement = (event) => {
+            this.setState((state, props) =>({
+                count: state.count +1
+            }));
+        }
+
+        handleDecrement = (event) => {
+            this.setState((state, props)=>({
+                count: state.count -1
+            }));
+        }
+
+        render() {
+            return (
+                <div>
+                    {this.state.count}
+                    <button onClick={this.handleIncrement}>increment (+)</button>
+                    <button onClick={this.handleDecrement}>decrement (-)></button>
+                </div>
+            );
+        }
+    }
+
+    let element = <Counter />
+
+    ReactDOM.render(
+        element,
+        document.getElementById("root")
+    );
+
+</script>
+
+</body>
+</html>
