@@ -32,28 +32,34 @@
             this.state = {
                 count: 0,
             };
-
             // this.handleIncrement = this.handleIncrement.bind(this);
         }
         
+        // new increment handler to update state 
+        // setting count to be 1 greater than it's previous value
         handleIncrement = (event) => {
-            this.setState((state, props) =>({
+            this.setState((state, props) =>
+            // wrapping code block in parenthesis makes it an object javascript gets confused otherwise.
+            ({
                 count: state.count +1
             }));
         }
-
+        
+        //new decrement handler to update state 
+        //setting count to be 1 less than it's previous value
         handleDecrement = (event) => {
             this.setState((state, props)=>({
                 count: state.count -1
             }));
         }
-
+        // simple render method just displaying the count
         render() {
             return (
                 <div>
-                    {this.state.count}
-                    <button onClick={this.handleIncrement}>increment (+)</button>
-                    <button onClick={this.handleDecrement}>decrement (-)></button>
+                    <button onClick={this.handleDecrement}>-</button>
+                    <span>{this.state.count}</span>
+                    {/* button with onClick that calls the incrementHandler method on this class */}
+                    <button onClick={this.handleIncrement}>+</button>
                 </div>
             );
         }
