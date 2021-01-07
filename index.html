@@ -14,6 +14,9 @@
         button {
             margin: 0.5rem;
         }
+        .special{
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -30,7 +33,7 @@
         constructor(props){
             super(props);
             this.state = {
-                count: 0,
+                count: props.initialCount || 0,
             };
             // this.handleIncrement = this.handleIncrement.bind(this);
         }
@@ -43,7 +46,7 @@
             // wrapping code block in parenthesis makes it an object javascript gets confused otherwise.
             ({
                 count: state.count +1
-            }));}
+            }) );}
         }
         
         //new decrement handler to update state 
@@ -54,15 +57,34 @@
                 count: state.count -1
             }));}
         }
+
+        resetCount = (event) => {
+            this.setState({
+                count: this.props.initialCount || 0
+            })
+        }
         // simple render method just displaying the count
         render() {
+            let countClassName = '';
+            if(this.state.count >= 10) {
+                countClassName = 'special'
+            }
+
+            let initialCount = this.props.initialCount || 0
+            let resetButton = ''
+            if (this.state.count !== initialCount){
+                resetButton = <button onClick={this.resetCount}>reset</button>
+            }
+
             return (
                 <div>
                     <button onClick={this.handleDecrement}>-</button>
-                    <span>{this.state.count}</span>
+                    <span className={countClassName}>{this.state.count}</span>
                     {/* button with onClick that calls the incrementHandler method on this class */}
                     <button onClick={this.handleIncrement}>+</button>
-
+                    <div>
+                        {resetButton}
+                    </div>
                 </div>
             );
         }
@@ -70,7 +92,7 @@
 
     let element = (
         <div>
-            <Counter />
+            <Counter initialCount = {2}/>
         </div>
     )
 
